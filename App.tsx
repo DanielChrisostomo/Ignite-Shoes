@@ -9,7 +9,8 @@ import { THEME } from './src/theme';
 import { Loading } from './src/components/Loading';
 
 import { CartContextProvider } from './src/contexts/CartContext';
-import { tagUserEmailRemove } from './src/notifications/notificationsTags';
+import { tagUserInfoCreate } from './src/notifications/notificationsTags';
+import React from 'react';
 
 const oneSignalAppId = Platform.OS === "ios" ? "colocar o apple id aqui" : "4a77bc0f-d9d0-44c9-9da7-572246380a91"
 
@@ -21,7 +22,8 @@ export default function App() {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold });
 
   // tagUserEmailCreate("rodrigo.goncalces@rocketseat.team")
-  tagUserEmailRemove("rodrigo.goncalces@rocketseat.team")
+  // tagUserEmailRemove("rodrigo.goncalces@rocketseat.team")
+  tagUserInfoCreate()
 
   return (
     <NativeBaseProvider theme={THEME}>
