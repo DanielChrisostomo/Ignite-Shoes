@@ -19,7 +19,6 @@ export function Notification({ data, onClose }: Props) {
 
   function handleOnPress () {
     const { route, product_id } = data.additionalData as AdditionalDataProps
-    console.log(route, product_id)
     if(route === "details" && product_id) {
       navigate("details", { productId: product_id})
       onClose()
