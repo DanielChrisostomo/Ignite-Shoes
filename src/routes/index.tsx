@@ -20,7 +20,6 @@ export function Routes() {
       console.log(response);
       setNotification(response)
     } 
-    console.log("passou aqui fora")
 
     OneSignal.Notifications.addEventListener("foregroundWillDisplay", handleNotification)
 
@@ -32,7 +31,7 @@ export function Routes() {
     <NavigationContainer theme={theme}>
       <AppRoutes />
 
-      {notification?.title && <Notification title={notification.title} onClose={() => setNotification(undefined)} />} 
+      {notification?.title && <Notification data={notification} onClose={() => setNotification(undefined)} />} 
     </NavigationContainer>
   );
 }
