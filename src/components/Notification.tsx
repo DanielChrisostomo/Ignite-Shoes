@@ -2,6 +2,7 @@ import { HStack, Text, IconButton, CloseIcon, Icon, Pressable } from 'native-bas
 import { Ionicons } from '@expo/vector-icons';
 import { OSNotification } from 'react-native-onesignal';
 import { useNavigation } from '@react-navigation/native';
+import * as Linking from "expo-linking";
 
 type Props = {
   data: OSNotification
@@ -13,17 +14,41 @@ type AdditionalDataProps = {
   product_id?: string
 }
 
+type CustomOSNotification = {
+  custom: any;
+};
+
+type CustomUOSNotification = {
+  u: string;
+};
+
 export function Notification({ data, onClose }: Props) {
 
   const { navigate } = useNavigation()
 
-  function handleOnPress () {
-    const { route, product_id } = data.additionalData as AdditionalDataProps
-    if(route === "details" && product_id) {
-      navigate("details", { productId: product_id})
-      onClose()
+  const handleOnPress = () => {
+    console.log(data);
+    
+    const { custom }: CustomOSNotification = JSON.parse(
+      data.rawPayload.toString()
+    );
+    const { u: uri }: CustomUOSNotification = JSON.parse(custom.toString());
+    console.log(uri);
+
+    if (uri) {
+      Linking.openURL(uri);
+      onClose();
     }
-  }
+  };
+
+  // function handleOnPress () {
+  //   const { route, product_id } = data.additionalData as AdditionalDataProps
+
+  //   if(route === "details" && product_id) {
+  //     navigate("details", { productId: product_id})
+  //     onClose()
+  //   }
+  // }
 
   return (
     <Pressable w="full" p={4} pt={12} bgColor="gray.200" position="absolute" onPress={handleOnPress}>

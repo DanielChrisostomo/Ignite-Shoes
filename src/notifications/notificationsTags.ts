@@ -17,3 +17,8 @@ export function tagUserInfoCreate() {
         user_email: "rodrigo.goncalces@rocketseat.team",
      })
   } 
+
+  // adicionando e removendo itens no carrinho e enviando info para OneSignal User Tags
+  export function tagCartUpdate(itemsCount: string){
+   OneSignal.User.addTag("cart_items_count", itemsCount)
+  }
